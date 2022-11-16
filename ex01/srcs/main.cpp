@@ -40,7 +40,6 @@ int main(int argc, char **argv)
 		std::cout << std::endl;
 		float	array[] = {3.1, 2.4, 1.5};
 		::iter(array, 3, &printContent);
-
 	}
 	return 0;
 }
