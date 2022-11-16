@@ -2,8 +2,8 @@
 
 #include <iostream>
 #include "colors.hpp"
-#include <stdlib>
-
+// #include <stdlib.h>
+#include <climits>
 
 // define a clas array of type T the type is not know yet and will 
 // be defined by instantiation of object of class array<T> from main.
@@ -11,7 +11,7 @@ template<typename T>
 class Array
 {
 	private:
-		int size_;
+		int	size_;
 		T	*array_;
 	public:
 		// default constructor
@@ -23,34 +23,31 @@ class Array
 		// constructor param1
 		Array<T>(unsigned int n)
 		: size_(n)
-		, array_(new T(size_))
 		{
-			if (size_ < 0 && size_ > 2147483647)
-			{
-				std::cout << "Invalid int" << std::endl;
-				exit(-1);
-			}
+			if (size_ < 0 || size_ > INT_MAX)
+				throw std::overflow_error("!!! Invalid size !!!\nPlease choose an integer between 0 and 2147483647");
+			array_ = new T[size_];
 		}
 
 		// copy contructor
-		Array(const Array<T> & ori)
+		Array<T>(const Array<T> & ori)
 		: size_(ori.size_)
 		, array_(new T(size_))
 		{}
 
 		// destructor
-		~Array(void)
+		~Array<T>(void)
 		{
 			if (size_ > 0)
 				delete [] array_;
 		}
 
 		// assignement operator (delete and replace)
-		Array & operator=(const Array & rhs)
+		Array<T> & operator=(const Array<T> & rhs)
 		{
 			if (this != &rhs)
 			{
-				if (size_ > 0)
+				if (size_ != 0)
 					delete [] array_;
 				size_ = rhs.size();
 				array_ = new T[size_];
@@ -60,26 +57,34 @@ class Array
 			return *this;
 		}
 
-		int	getSize() const
+		T &	operator[](const int i) const
 		{
-			return size_;
+			if (i < 0 || i >= size_)
+				throw std::overflow_error("!!! Invalid index !!!\nPlease choose an integer between 0 and the size of the array.");
+			return array_[i];
 		}
 
-		T	getArray(int i) const
+		void	displayInfo(std::ostream & o) const
 		{
-			if (i >= 0 && i <= size_)
-				return array_[i];
-			return 0;
+			o << "Number of elements in array : "
+				<< ORANGERED1 << size_ << RESET << std::endl;
+			if (size_ == 0)
+				o << RED1 << "Nothing to display" << RESET << std::endl;
+			for (int i = 0; i < size_; i++)
+				o << "array[" << NAVYBLUE << i << RESET << "] = "
+					<< array_[i] << std::endl;
+			o << "----------------------------------------------";
+		}
+
+		int	size() const
+		{
+			return size_;
 		}
 };
 
 template<typename T>
 std::ostream &	operator<<(std::ostream & o, const Array<T> & rhs)
 {
-	if (rhs.getSize() == 0)
-		std::cout << "Nothing to display." << std::endl;
-	// o << "Displaying an array of " << <T> << std::endl;
-	for (int i = 0; i < rhs.getSize() ; i++)
-		o << rhs.getArray(i) << std::endl;
+	rhs.displayInfo(o);
 	return o;
 }
