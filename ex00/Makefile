@@ -1,6 +1,6 @@
 # project settings
-NAME 			:=	swap
-NAME_AR			:=	swap.a
+NAME 			:=	templates
+NAME_AR			:=	templates.a
 C++				:=	c++
 CXXFLAGS		:=	-MMD -Wall -Wextra -Werror -std=c++98
 # CXXFLAGSADD		:=	-g3
@@ -15,7 +15,6 @@ SRCS_PATH		:=	srcs
 RM				:=	rm -rf
 
 SRCS			:=	main.cpp \
-					Scalar.cpp \
 
 OBJS			:=	$(addprefix $(OPATH)/, $(SRCS:.cpp=.o))
 DEPS			:=	$(OBJS:.o=.d)

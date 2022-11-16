@@ -1,10 +1,10 @@
-#include <iostream>
-#include "swap.hpp"
+#include "templates.hpp"
 
 int main( void )
 {
 	int a = 2;
 	int b = 3;
+
 	::swap(a, b);
 	std::cout << "a = " << a << ", b = " << b << std::endl;
 	std::cout << "min( a, b ) = " << ::min( a, b ) << std::endl;
@@ -19,3 +19,12 @@ int main( void )
 	std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
 	return 0;
 }
+
+// OUTPUT SHOULD BE ---------------------------------------------------
+
+// a = 3, b = 2
+// min(a, b) = 2
+// max(a, b) = 3
+// c = chaine2, d = chaine1
+// min(c, d) = chaine1
+// max(c, d) = chaine2
