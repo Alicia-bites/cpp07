@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include "colors.hpp"
 
 // Compares the two values passed in its arguments and returns the greatest one.
 // If the two of them are equal, then it returns the second one.
@@ -26,3 +27,26 @@ void	swap(T & A, T & B)
 	A = B;
 	B = temp;
 }
+
+class Test
+{
+	private:
+		int	number_;
+	public:
+		Test(void);
+		Test(int number);
+		Test(const Test & ori);
+		~Test(void);
+		Test &operator=(const Test & rhs);
+
+		int	getNumber() const ;
+
+		bool operator==(const Test & rhs) const;
+		bool operator<=(const Test & rhs) const;
+		bool operator>=(const Test & rhs) const;
+		bool operator<(const Test & rhs) const;
+		bool operator>(const Test & rhs) const;
+
+};
+
+std::ostream&	operator<<(std::ostream& o, const Test & rhs);

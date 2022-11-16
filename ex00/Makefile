@@ -15,6 +15,7 @@ SRCS_PATH		:=	srcs
 RM				:=	rm -rf
 
 SRCS			:=	main.cpp \
+					test.cpp \
 
 OBJS			:=	$(addprefix $(OPATH)/, $(SRCS:.cpp=.o))
 DEPS			:=	$(OBJS:.o=.d)
