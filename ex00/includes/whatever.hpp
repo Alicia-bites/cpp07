@@ -1,7 +1,10 @@
 #pragma once
 
+# define STEELBLUE3 "\033[38;5;81m"
+# define STEELBLUE4 "\033[38;5;68m"
+# define RESET "\033[0m"
+
 #include <iostream>
-#include "colors.hpp"
 
 // Compares the two values passed in its arguments and returns the greatest one.
 // If the two of them are equal, then it returns the second one.

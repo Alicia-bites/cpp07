@@ -1,8 +1,23 @@
 #pragma once
 
+# define STEELBLUE3 "\033[38;5;81m"
+# define STEELBLUE4 "\033[38;5;68m"
+# define YELLOW2 "\033[38;5;190m"
+# define YELLOW3 "\033[38;5;148m"
+# define YELLOW4 "\033[38;5;184m"
+# define SPRINGGREEN1 "\033[38;5;48m"
+# define SPRINGGREEN2 "\033[38;5;42m"
+# define SPRINGGREEN3 "\033[38;5;47m"
+# define SPRINGGREEN4 "\033[38;5;35m"
+# define SPRINGGREEN5 "\033[38;5;41m"
+# define SPRINGGREEN6 "\033[38;5;29m"
+# define ORANGERED1 "\033[38;5;202m"
+# define RED1 "\033[38;5;196m"
+# define CHARTREUSE4 "\033[38;5;70m"
+# define RESET "\033[0m"
+
 #include <iostream>
-#include "colors.hpp"
-// #include <stdlib.h>
+#include <stdlib.h>
 #include <climits>
 
 // define a clas array of type T the type is not know yet and will 
@@ -32,8 +47,11 @@ class Array
 		// copy contructor
 		Array<T>(const Array<T> & ori)
 		: size_(ori.size_)
-		, array_(new T(size_))
-		{}
+		{
+			array_ = new T[size_];
+			for (int i = 0; i < size_; i++)
+				array_[i] = ori.array_[i];
+		}
 
 		// destructor
 		~Array<T>(void)
@@ -52,7 +70,7 @@ class Array
 				size_ = rhs.size();
 				array_ = new T[size_];
 				for (int i = 0; i < size_; i++)
-					array_[i] = rhs[i];
+					array_[i] = rhs.array_[i];
 			}
 			return *this;
 		}
@@ -71,7 +89,7 @@ class Array
 			if (size_ == 0)
 				o << RED1 << "Nothing to display" << RESET << std::endl;
 			for (int i = 0; i < size_; i++)
-				o << "array[" << NAVYBLUE << i << RESET << "] = "
+				o << "array[" << SPRINGGREEN3 << i << RESET << "] = "
 					<< array_[i] << std::endl;
 			o << "----------------------------------------------";
 		}
